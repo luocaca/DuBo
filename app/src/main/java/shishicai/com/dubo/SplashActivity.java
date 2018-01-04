@@ -71,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
         RequestParams params = new RequestParams("http://www.27305.com/frontApi/getAboutUs");
 
-        params.addQueryStringParameter("appid", "xUtils");
+        params.addQueryStringParameter("appid", "1801021340");
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
