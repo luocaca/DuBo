@@ -26,13 +26,13 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@mipmap/top" />
+                android:background="@mipmap/hot" />
 
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="25dp"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -45,19 +45,6 @@
         android:id="@+id/rvToDoList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/btn_default"
-        app:backgroundTint="@color/colorPrimary"
-        app:layout_anchor="@+id/rvToDoList"
-        app:layout_anchorGravity="right|top"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

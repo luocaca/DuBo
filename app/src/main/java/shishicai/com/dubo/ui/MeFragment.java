@@ -1,5 +1,6 @@
 package shishicai.com.dubo.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shishicai.com.dubo.R;
+import shishicai.com.dubo.WebViewActivity;
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.util.D;
 
@@ -79,6 +81,15 @@ public class MeFragment extends BaseFragment {
 //            }
 //        });
 
+
+        rootView.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WebViewActivity.initUrl="http://m.zhcw.com/index.jsp;jsessionid=306C148A7E0DE33C0B859137D61FAB80.h5_229";
+                WebViewActivity.start(getActivity());
+            }
+        });
+
         rvToDoList = rootView.findViewById(R.id.rvToDoList);
 
 
@@ -123,7 +134,6 @@ public class MeFragment extends BaseFragment {
         }
     }
 
-
     @Override
     protected int bindLayoutID() {
         return R.layout.fragment_me;
@@ -155,7 +165,7 @@ public class MeFragment extends BaseFragment {
 //                return newsList.size();
 //            }
 //        });
-
+//http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=3&pageSize=20&busiCode=300205&src=0000100001%7C6000003060
 
     }
 
@@ -173,7 +183,7 @@ public class MeFragment extends BaseFragment {
         }
 
 
-        public static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+        private static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
             List<News> mNewsList;
             Context mContext;
@@ -185,14 +195,29 @@ public class MeFragment extends BaseFragment {
 
             @Override
             public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(mContext).inflate(R.layout.item, null);
+                View view = LayoutInflater.from(mContext).inflate(R.layout.item1,parent ,false);
                 return new MyViewHolder(view);
             }
 
             @Override
-            public void onBindViewHolder(MyViewHolder holder, int position) {
+            public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-                holder.t.setText("hello world" + position);
+//              holder.t.setText("hello world" + position);
+                holder.t.setText(mNewsList.get(position).title);
+
+//                LinearLayout.LayoutParams marginLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                holder.t.setLayoutParams(marginLayoutParams);
+
+                holder.t.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        Snackbar.make(view, mNewsList.get(position).title + "\n " + mNewsList.get(position).url, Snackbar.LENGTH_LONG).show();
+                        WebViewActivity.initUrl = mNewsList.get(position).url;
+                        WebViewActivity.start((Activity) mContext);
+
+                    }
+                });
+
 
                 D.i("onBindViewHolder" + mNewsList.toString());
 

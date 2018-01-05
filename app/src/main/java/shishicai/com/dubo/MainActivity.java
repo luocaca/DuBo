@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import shishicai.com.dubo.base.BaseFragment;
+import shishicai.com.dubo.ui.CenterFragment;
+import shishicai.com.dubo.ui.HotFragment;
 import shishicai.com.dubo.ui.MeFragment;
 
 
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             case 0://王超
                 //如果王超的fragment是null的话,就创建一个
                 if (mefragment == null) {
-                    mefragment = new MeFragment();
+                    mefragment = new HotFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment);
                 } else {
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 if (mefragment1 == null) {
-                    mefragment1 = new MeFragment();
+                    mefragment1 = new CenterFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment1);
                 } else {

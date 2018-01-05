@@ -1,21 +1,20 @@
 package shishicai.com.dubo;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
-
-import java.lang.reflect.Field;
 
 import shishicai.com.dubo.util.D;
 
@@ -33,7 +32,9 @@ public class SplashActivity extends AppCompatActivity {
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);   //去除半透明状态栏
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);  //一般配合fitsSystemWindows()使用, 或者在根部局加上属性android:fitsSystemWindows="true", 使根部局全屏显示
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
 //        try {
 //            DecorView decordView = this.getWindow().getDecorView();     //获取DecorView实例
@@ -65,6 +66,18 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * {
+     * "appid": "1801021340",
+     * "appname": "",
+     * "isshowwap": "2",
+     * "wapurl": "",
+     * "status": 1,
+     * "desc": "成功返回数据"
+     * }
+     */
+
     private void request() {
 
         //http://www.27305.com/frontApi/getAboutUs?appid=（appid）
@@ -75,26 +88,39 @@ public class SplashActivity extends AppCompatActivity {
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
+//              Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
                 D.i(result);
+                String isshowwap = "2";
 //                WebActivity.start(SplashActivity.this);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    isshowwap = jsonObject.getString("isshowwap");
+                    D.i("==========接口解析成功====isshowwap===" + isshowwap);
+                } catch (JSONException e) {
 
-                MainActivity.start(SplashActivity.this);
-                finish();
-
-
+                    isshowwap = "1";
+                    D.w("==========接口解析失败=====isshowwap===" + isshowwap);
+                    e.printStackTrace();
+                }
+                if (isshowwap.equals("1")) {
+                    WebActivity.start(SplashActivity.this);
+                    finish();
+                } else {
+                    MainActivity.start(SplashActivity.this);
+                    finish();
+                }
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 MainActivity.start(SplashActivity.this);
                 finish();
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+//                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
                 MainActivity.start(SplashActivity.this);
                 finish();
             }
