@@ -12,11 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-
-
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'x86'
+            abiFilters 'armeabi', 'x86'   , 'armeabi-v7a'  , 'arm64-v8a'//选择要添加的对应cpu类型的.so库。
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
 
@@ -24,8 +22,13 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "bf37a5fe36d71ffc926a3eae", //JPush上注册的包名对应的appkey.
+                /*360*/
+                JPUSH_APPKEY : "83d87993a82b7d33ad761142", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+
+                /*华为*/
+//                JPUSH_APPKEY : "bf37a5fe36d71ffc926a3eae", //JPush上注册的包名对应的appkey.
+//                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
 
     }

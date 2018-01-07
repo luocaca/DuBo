@@ -1,6 +1,5 @@
 package shishicai.com.dubo.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -17,11 +16,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xutils.DbManager;
+import org.xutils.db.annotation.Column;
+import org.xutils.db.annotation.Table;
+import org.xutils.ex.DbException;
+import org.xutils.x;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import shishicai.com.dubo.MainActivity;
 import shishicai.com.dubo.R;
 import shishicai.com.dubo.WebViewActivity;
 import shishicai.com.dubo.base.BaseFragment;
@@ -63,16 +68,6 @@ public class MeFragment extends BaseFragment {
         //http://www.zhcw.com/czpd/kkcc/k3/
 //        Document html = Jsoup.connect().get();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                request();
-
-
-            }
-        }).start();
-
 
 //        rootView.findViewById(R.id.load).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -85,7 +80,7 @@ public class MeFragment extends BaseFragment {
         rootView.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WebViewActivity.initUrl="http://m.zhcw.com/index.jsp;jsessionid=306C148A7E0DE33C0B859137D61FAB80.h5_229";
+                WebViewActivity.initUrl = "http://m.zhcw.com/index.jsp;jsessionid=306C148A7E0DE33C0B859137D61FAB80.h5_229";
                 WebViewActivity.start(getActivity());
             }
         });
@@ -94,6 +89,37 @@ public class MeFragment extends BaseFragment {
 
 
         rvToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
+
+
+        /*读取缓存*/
+        try {
+            newsList = x.getDb(new DbManager.DaoConfig()).findAll(News.class);
+//            Snackbar.make(rootView, "加载缓存成功....", Snackbar.LENGTH_LONG).show();
+
+            if (newsList != null && newsList.size() != 0)
+                setDatas();
+
+        } catch (DbException e) {
+//            Snackbar.make(rootView, "加载缓存失败....、" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+        }
+
+
+        if (newsList == null) {
+            newsList = new ArrayList<>();
+        }
+
+        if (newsList.size() == 0) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    request();
+                }
+            }).start();
+        }
 
 
     }
@@ -112,12 +138,17 @@ public class MeFragment extends BaseFragment {
                     news.url = inner.get(i).select("a").attr("abs:href");
                     D.i("============News============\n" + news.toString());
                     newsList.add(news);
+                      /*add to cache */
+                    x.getDb(new DbManager.DaoConfig())
+                            .saveOrUpdate(news);
                 }
 
             }
 
 
             handler.sendEmptyMessage(0);
+
+
 //            getActivity().runOnUiThread(new Runnable() {
 //                @Override
 //                public void run() {
@@ -128,8 +159,8 @@ public class MeFragment extends BaseFragment {
 
             Snackbar.make(rootView, "加载成功", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            request();
-            Snackbar.make(rootView, "加载失败，重试中 ...", Toast.LENGTH_SHORT).show();
+//            request();
+            Snackbar.make(rootView, "加载失败，重试中 ..." + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -170,8 +201,16 @@ public class MeFragment extends BaseFragment {
     }
 
 
+    @Table(name = "News")
     public static class News {
+
+        @Column(name = "id", isId = true)
+        public int id;
+
+        @Column(name = "url")
         public String url = "";
+
+        @Column(name = "title")
         public String title = "";
 
         @Override
@@ -195,7 +234,7 @@ public class MeFragment extends BaseFragment {
 
             @Override
             public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(mContext).inflate(R.layout.item1,parent ,false);
+                View view = LayoutInflater.from(mContext).inflate(R.layout.item1, parent, false);
                 return new MyViewHolder(view);
             }
 
@@ -212,9 +251,9 @@ public class MeFragment extends BaseFragment {
                     @Override
                     public void onClick(View view) {
 //                        Snackbar.make(view, mNewsList.get(position).title + "\n " + mNewsList.get(position).url, Snackbar.LENGTH_LONG).show();
-                        WebViewActivity.initUrl = mNewsList.get(position).url;
-                        WebViewActivity.start((Activity) mContext);
-
+//                        WebViewActivity.initUrl = mNewsList.get(position).url;
+//                        WebViewActivity.start((Activity) mContext);
+                        ((MainActivity) mContext).startFragment(mNewsList.get(position).url);
                     }
                 });
 

@@ -30,6 +30,39 @@ public abstract class BaseWebViewActivity extends BaseMVPActivity {
         //启用支持Javascript
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
+
+
+//设置自适应
+
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL.SINGLE_COLUMN);
+
+        settings.setDefaultTextEncodingName("UTF-8");
+
+        settings.setAppCacheEnabled(true);
+
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+//        mWebView.loadDataWithBaseURL(null,content,"text/html","utf-8",null);
+
+//        作者：我姓连
+//        链接：https://www.jianshu.com/p/b1f3222c859b
+//        來源：简书
+//        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

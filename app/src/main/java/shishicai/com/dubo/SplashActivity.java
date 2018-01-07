@@ -84,10 +84,23 @@ public class SplashActivity extends AppCompatActivity {
 
         RequestParams params = new RequestParams("http://www.27305.com/frontApi/getAboutUs");
 
-        params.addQueryStringParameter("appid", "1801021340");
+        /*华为 id*/
+//        params.addQueryStringParameter("appid", "1801021340");
+
+        /*360id*/
+        params.addQueryStringParameter("appid", "1801021341");
+        // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
+        params.setCacheMaxAge(1000 * 60 * 24 * 3);
         x.http().get(params, new Callback.CommonCallback<String>() {
+
             @Override
             public void onSuccess(String result) {
+
+//
+//                if (true)
+//                {
+//                    MainActivity.start(SplashActivity.this);
+//                }
 //              Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
                 D.i(result);
                 String isshowwap = "2";

@@ -62,17 +62,27 @@ public class HotFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int totalItemCount = recyclerView.getAdapter().getItemCount();
-                int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
-                int visibleItemCount = recyclerView.getChildCount();
+//                if (recyclerView.getAdapter() != null) {
+//                    return;
+//                }
+                try {
+                    int totalItemCount = recyclerView.getAdapter().getItemCount();
+                    int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
+                    int visibleItemCount = recyclerView.getChildCount();
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItemPosition == totalItemCount - 1
-                        && visibleItemCount > 0) {
-                    //加载更多
-                    request(page++);
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE
+                            && lastVisibleItemPosition == totalItemCount - 1
+                            && visibleItemCount > 0) {
+                        //加载更多
+                        request(page++);
 
+                    }
+                } catch (Exception e) {
+                    Log.w(TAG, "onScrollStateChanged: " + e.getMessage());
+//                    e.printStackTrace();
                 }
+
+
             }
         });
 
@@ -94,7 +104,36 @@ public class HotFragment extends BaseFragment {
         Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
         String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
         RequestParams params = new RequestParams(url);
-        x.http().get(params, new Callback.CommonCallback<String>() {
+
+        // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
+        params.setCacheMaxAge(1000 * 60 * 60 * 24);
+        x.http().get(params, new Callback.CacheCallback<String>() {
+            @Override
+            public boolean onCache(String result) {
+
+                // 得到缓存数据, 缓存过期后不会进入这个方法.
+                // 如果服务端没有返回过期时间, 参考params.setCacheMaxAge(maxAge)方法.
+                //
+                // * 客户端会根据服务端返回的 header 中 max-age 或 expires 来确定本地缓存是否给 onCache 方法.
+                //   如果服务端没有返回 max-age 或 expires, 那么缓存将一直保存, 除非这里自己定义了返回false的
+                //   逻辑, 那么xUtils将请求新数据, 来覆盖它.
+                //
+                // * 如果信任该缓存返回 true, 将不再请求网络;
+                //   返回 false 继续请求网络, 但会在请求头中加上ETag, Last-Modified等信息,
+                //   如果服务端返回304, 则表示数据没有更新, 不继续加载数据.
+                //
+
+//                Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
+//                D.i(result);
+                HotNews hotNews = GsonUtil.formateJson2Bean(result, HotNews.class);
+
+//                newsList.addAll(hotNews.dataList);
+                setDatas(hotNews.dataList);
+//                WebActivity.start(SplashActivity.this);
+                D.i("====================json===============\n" + GsonUtil.formatJson2String(result));
+
+                return true;
+            }
 
             @Override
             public void onSuccess(String result) {
@@ -187,6 +226,12 @@ public class HotFragment extends BaseFragment {
             return mNewsList.size();
         }
     }
+
+
+
+
+
+
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

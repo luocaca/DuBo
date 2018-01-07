@@ -3,6 +3,7 @@ package shishicai.com.dubo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,12 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.ui.CenterFragment;
 import shishicai.com.dubo.ui.HotFragment;
 import shishicai.com.dubo.ui.MeFragment;
+import shishicai.com.dubo.ui.MeFragmentDetail;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
+
+    private LinearLayout container;
 
     private ViewPager viewPager;
 
@@ -80,14 +88,17 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);   //去除半透明状态栏
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);  //一般配合fitsSystemWindows()使用, 或者在根部局加上属性android:fitsSystemWindows="true", 使根部局全屏显示
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
         setContentView(R.layout.activity_main);
         macActivity = this;
-        mFragmentManager = getSupportFragmentManager() ;
+        mFragmentManager = getSupportFragmentManager();
 //        hideFragment(ft);
         setClick(0);
         mTextMessage = (TextView) findViewById(R.id.message);
+        container = (LinearLayout) findViewById(R.id.container);
         content = (FrameLayout) findViewById(R.id.content);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -101,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private FragmentManager mFragmentManager;//fragment管理者
+
     private void setClick(int type) {
         //开启事务
         //开启事务
@@ -169,4 +181,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    List<BaseFragment> baseFragments = new ArrayList<>();
+
+    public void startFragment(String url) {
+
+        BaseFragment baseFragment = new MeFragmentDetail().newInstances(url);
+//        BaseFragment baseFragment = new TencentNewsFragment().newInstances(url);
+        baseFragments.add(0,baseFragment);
+
+        mFragmentManager.beginTransaction().addToBackStack("main")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                .setCustomAnimations(
+//                        R.animator.fragment_slide_right_in, R.anim.fragment_slide_left_out,
+//                        R.anim.fragment_slide_left_in, R.anim.fragment_slide_right_out)
+                .add(android.R.id.content, baseFragment).commit();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (baseFragments.size() == 0) {
+            super.onBackPressed();
+        } else {
+            mFragmentManager.beginTransaction() .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).remove(baseFragments.get(0));
+            baseFragments.remove(0);
+            mFragmentManager.popBackStack();
+        }
+
+    }
 }
