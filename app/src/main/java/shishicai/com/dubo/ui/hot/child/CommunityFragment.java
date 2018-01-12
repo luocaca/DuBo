@@ -1,10 +1,12 @@
-package shishicai.com.dubo.ui;
+package shishicai.com.dubo.ui.hot.child;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.model.HotNews;
 import shishicai.com.dubo.util.D;
 import shishicai.com.dubo.util.GsonUtil;
+import shishicai.com.dubo.util.MyAnimator;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,7 +36,8 @@ import static android.content.ContentValues.TAG;
  * 个人中心界面  用于检查更新，查看版本信息 已经推送中心
  */
 
-public class HotFragment extends BaseFragment {
+
+public class CommunityFragment extends BaseFragment {
 
     String host = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=3&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
 
@@ -57,6 +61,8 @@ public class HotFragment extends BaseFragment {
 
 
         rvToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        rvToDoList.setItemAnimator(new DefaultItemAnimator());
 
         rvToDoList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -173,6 +179,7 @@ public class HotFragment extends BaseFragment {
     MyAdapter myAdapter;
 
     public void setDatas(List<HotNews.DataListBean> datas) {
+        MyAnimator.animationsLocked = false;
         newsList.addAll(datas);
         if (myAdapter == null) {
             myAdapter = new MyAdapter(newsList, getActivity());
@@ -197,12 +204,14 @@ public class HotFragment extends BaseFragment {
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.item_hot, parent, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.cardview_item_hot, parent, false);
             return new MyViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position) {
+            MyAnimator.runEnterAnimation(holder.itemView, position);
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -213,7 +222,7 @@ public class HotFragment extends BaseFragment {
                 }
             });
             holder.time.setText(mNewsList.get(position).publishDate);
-            holder.content.setText(mNewsList.get(position).summary);
+            holder.content.setText(TextUtils.isEmpty(mNewsList.get(position).summary) ? "-" : mNewsList.get(position).summary);
             holder.t.setText(mNewsList.get(position).title);
             x.image().bind(holder.imageView, mNewsList.get(position).logoFile);
 
@@ -226,12 +235,6 @@ public class HotFragment extends BaseFragment {
             return mNewsList.size();
         }
     }
-
-
-
-
-
-
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

@@ -118,7 +118,7 @@ public class MeFragmentDetail extends BaseFragment {
 
     public String getUrl() {
         String st = getArguments().getString("aaa", "");
-        Snackbar.make(rootView, "url-> " + st, Snackbar.LENGTH_LONG).show();
+//        Snackbar.make(rootView, "url-> " + st, Snackbar.LENGTH_LONG).show();
         return st;
     }
 

@@ -23,9 +23,9 @@ import java.util.List;
 
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.ui.CenterFragment;
-import shishicai.com.dubo.ui.HotFragment;
 import shishicai.com.dubo.ui.MeFragment;
 import shishicai.com.dubo.ui.MeFragmentDetail;
+import shishicai.com.dubo.ui.hot.HotFragment;
 
 
 public class MainActivity extends AppCompatActivity {
