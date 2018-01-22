@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.weavey.loading.lib.LoadingLayout;
 
+import org.xutils.x;
+
 import shishicai.com.dubo.util.D;
 
 /**
@@ -40,24 +42,33 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(bindLayoutID(), null);
         this.rootView = mRootView;
+        x.view().inject(this, rootView);
 
         initView(mRootView);
         initListener();
         D.e("======当前Fragment===位置=====" + this.getClass().getName());
+
+
+        initView(inflater, container, savedInstanceState);
+
         return rootView;
     }
+
+    protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    }
+
+    ;
+
 
     protected void initListener() {
 
     }
 
 
-
-
     public int bindLoadingLayout() {
         return 0;
     }
-
 
 
     @Override
@@ -129,9 +140,6 @@ public abstract class BaseFragment extends Fragment {
         }
         return (T) view;
     }
-
-
-
 
 
 }

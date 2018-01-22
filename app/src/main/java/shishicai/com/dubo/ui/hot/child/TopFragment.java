@@ -84,6 +84,7 @@ public class TopFragment extends BaseFragment {
                         //加载更多
                         request(page++);
 
+
                     }
                 } catch (Exception e) {
                     Log.w(TAG, "onScrollStateChanged: " + e.getMessage());

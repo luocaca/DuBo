@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+
+//    compileOptions {
+//        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//    }
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+
+
+    }
+
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+
+

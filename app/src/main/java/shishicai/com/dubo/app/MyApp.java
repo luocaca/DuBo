@@ -1,6 +1,6 @@
 package shishicai.com.dubo.app;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import org.xutils.x;
 
@@ -10,7 +10,7 @@ import cn.jpush.android.api.JPushInterface;
  *
  */
 
-public class MyApp extends Application {
+public class MyApp extends MultiDexApplication {
 
     @Override
     public void onCreate() {
