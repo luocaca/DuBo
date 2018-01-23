@@ -22,6 +22,7 @@ public class HotNews implements Serializable {
     public int totalPage;
     public List<DataListBean> dataList;
 
+
     public static class DataListBean {
         /**
          * logoFile :

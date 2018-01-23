@@ -33,7 +33,7 @@ import shishicai.com.dubo.util.MyAnimator;
 import static android.content.ContentValues.TAG;
 
 /**
- * 个人中心界面  用于检查更新，查看版本信息 已经推送中心
+ * 政策  界面  用于检查更新，查看版本信息 已经推送中心
  */
 
 
@@ -44,6 +44,9 @@ public class PolicyFragment extends BaseFragment {
     RecyclerView rvToDoList;
 
     List<HotNews.DataListBean> newsList = new ArrayList<>();
+
+    public String busiCode = "300210";
+
 
     int page = 1;
 
@@ -108,7 +111,9 @@ public class PolicyFragment extends BaseFragment {
     private void request(int page) {
 
         Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
-        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+//        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=" + busiCode + "&src=0000100001%7C6000003060";
+
         RequestParams params = new RequestParams(url);
 
         // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)

@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shishicai.com.dubo.base.BaseFragment;
-import shishicai.com.dubo.ui.CenterFragment;
 import shishicai.com.dubo.ui.MeFragment;
 import shishicai.com.dubo.ui.MeFragmentDetail;
 import shishicai.com.dubo.ui.hot.HotFragment;
+import shishicai.com.dubo.ui.hot.news.NewsFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 if (mefragment1 == null) {
-                    mefragment1 = new CenterFragment();
+//                    mefragment1 = new CenterFragment();
+                    mefragment1 = new NewsFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment1);
                 } else {

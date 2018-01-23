@@ -2,7 +2,6 @@ package shishicai.com.dubo.ui.hot.child;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -51,13 +49,14 @@ public class TopFragment extends BaseFragment {
 
     @Override
     protected int bindLayoutID() {
-        return R.layout.fragment_hot;
+        return R.layout.fragment_top;
     }
 
 
     @Override
     protected void initView(final View rootView) {
 
+        this.rootView = rootView;
 
         rvToDoList = rootView.findViewById(R.id.rvToDoList);
 
@@ -96,8 +95,6 @@ public class TopFragment extends BaseFragment {
         });
 
 
-        request(page++);
-
 //        rootView.findViewById(R.id.load).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -108,48 +105,28 @@ public class TopFragment extends BaseFragment {
 
     }
 
+    @Override
+    protected void loadData() {
+        request(page++);
+    }
 
     private void request(int page) {
 
-        Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
+        D.e("========request===========");
+
+//        Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
+//        String host = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
 
         //            http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300203&src=0000100001%7C6000003060
-        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=\" + busiCode + \"&src=0000100001%7C6000003060";
+        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=" + busiCode + "&src=0000100001%7C6000003060";
         RequestParams params = new RequestParams(url);
 
         // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
         params.setCacheMaxAge(1000 * 60 * 60 * 24);
-        x.http().get(params, new Callback.CacheCallback<String>() {
-            @Override
-            public boolean onCache(String result) {
-
-                // 得到缓存数据, 缓存过期后不会进入这个方法.
-                // 如果服务端没有返回过期时间, 参考params.setCacheMaxAge(maxAge)方法.
-                //
-                // * 客户端会根据服务端返回的 header 中 max-age 或 expires 来确定本地缓存是否给 onCache 方法.
-                //   如果服务端没有返回 max-age 或 expires, 那么缓存将一直保存, 除非这里自己定义了返回false的
-                //   逻辑, 那么xUtils将请求新数据, 来覆盖它.
-                //
-                // * 如果信任该缓存返回 true, 将不再请求网络;
-                //   返回 false 继续请求网络, 但会在请求头中加上ETag, Last-Modified等信息,
-                //   如果服务端返回304, 则表示数据没有更新, 不继续加载数据.
-                //
-
-//                Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
-//                D.i(result);
-                HotNews hotNews = GsonUtil.formateJson2Bean(result, HotNews.class);
-
-//                newsList.addAll(hotNews.dataList);
-                setDatas(hotNews.dataList);
-//                WebActivity.start(SplashActivity.this);
-                D.i("====================json===============\n" + GsonUtil.formatJson2String(result));
-
-                return true;
-            }
-
+        x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-//              Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
+                //              Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
 //                D.i(result);
                 HotNews hotNews = GsonUtil.formateJson2Bean(result, HotNews.class);
 
@@ -162,19 +139,17 @@ public class TopFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-//
-                Snackbar.make(rootView, "加载失败", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                Snackbar.make(rootView, "取消请求", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onFinished() {
-                Snackbar.make(rootView, "加载结束", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -190,6 +165,7 @@ public class TopFragment extends BaseFragment {
         if (myAdapter == null) {
             myAdapter = new MyAdapter(newsList, getActivity());
             rvToDoList.setAdapter(myAdapter);
+            myAdapter.notifyDataSetChanged();
         } else {
             myAdapter.notifyDataSetChanged();
         }
@@ -198,7 +174,7 @@ public class TopFragment extends BaseFragment {
     }
 
 
-    private static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         List<HotNews.DataListBean> mNewsList;
         Context mContext;
@@ -209,8 +185,24 @@ public class TopFragment extends BaseFragment {
         }
 
         @Override
+        public int getItemViewType(int position) {
+
+            if (position % 10 == 0) {
+                return 1;
+            } else {
+                return super.getItemViewType(position);
+            }
+        }
+
+        @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.cardview_item_hot, parent, false);
+            View view;
+            if (viewType == 1) {
+                view = LayoutInflater.from(mContext).inflate(R.layout.cardview_item_hot_type, parent, false);
+            } else {
+                view = LayoutInflater.from(mContext).inflate(R.layout.cardview_item_hot, parent, false);
+            }
+
             return new MyViewHolder(view);
         }
 
@@ -227,8 +219,11 @@ public class TopFragment extends BaseFragment {
                     Log.i(TAG, "onClick: " + mNewsList.get(position).url);
                 }
             });
-            holder.time.setText(mNewsList.get(position).publishDate);
-            holder.content.setText(TextUtils.isEmpty(mNewsList.get(position).summary) ? "-" : mNewsList.get(position).summary);
+
+            if (holder.time != null)
+                holder.time.setText(mNewsList.get(position).publishDate);
+            if (holder.content != null)
+                holder.content.setText(TextUtils.isEmpty(mNewsList.get(position).summary) ? "-" : mNewsList.get(position).summary);
             holder.t.setText(mNewsList.get(position).title);
             x.image().bind(holder.imageView, mNewsList.get(position).logoFile);
 
@@ -260,5 +255,6 @@ public class TopFragment extends BaseFragment {
 
         }
     }
+
 
 }

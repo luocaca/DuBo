@@ -3,6 +3,7 @@ package shishicai.com.dubo.ui.hot.child;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ import shishicai.com.dubo.util.MyAnimator;
 import static android.content.ContentValues.TAG;
 
 /**
- * 个人中心界面  用于检查更新，查看版本信息 已经推送中心
+ * 300207工艺界面  用于检查更新，查看版本信息 已经推送中心
  */
 
 
@@ -43,9 +45,15 @@ public class CommunityFragment extends BaseFragment {
 
     RecyclerView rvToDoList;
 
+    @ViewInject(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
+
     List<HotNews.DataListBean> newsList = new ArrayList<>();
 
     int page = 1;
+
+    public String busiCode = "300207";
+
 
     @Override
     protected int bindLayoutID() {
@@ -57,6 +65,7 @@ public class CommunityFragment extends BaseFragment {
     protected void initView(final View rootView) {
 
 
+        this.rootView = rootView;
         rvToDoList = rootView.findViewById(R.id.rvToDoList);
 
 
@@ -95,6 +104,12 @@ public class CommunityFragment extends BaseFragment {
 
         request(page++);
 
+        swipeLayout.setOnRefreshListener(() -> {
+            page = 1;
+            request(page++);
+            new android.os.Handler().postDelayed(() -> swipeLayout.setRefreshing(false), 1000);
+        });
+
 //        rootView.findViewById(R.id.load).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -108,7 +123,9 @@ public class CommunityFragment extends BaseFragment {
     private void request(int page) {
 
         Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
-        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+//        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=" + busiCode + "&src=0000100001%7C6000003060";
+
         RequestParams params = new RequestParams(url);
 
         // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
@@ -145,6 +162,8 @@ public class CommunityFragment extends BaseFragment {
             public void onSuccess(String result) {
 //              Toast.makeText(x.app(), result, Toast.LENGTH_LONG).show();
 //                D.i(result);
+
+
                 HotNews hotNews = GsonUtil.formateJson2Bean(result, HotNews.class);
 
 //                newsList.addAll(hotNews.dataList);

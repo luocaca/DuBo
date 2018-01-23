@@ -1,10 +1,10 @@
 package shishicai.com.dubo.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ import shishicai.com.dubo.util.D;
 
 public abstract class BaseFragment extends Fragment {
 
-    protected Activity mActivity;
+    protected AppCompatActivity mActivity;
 
     // fragment是否显示了
     public boolean mIsVisible = false;
@@ -112,7 +112,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        mActivity = (Activity) context;
+        mActivity = (AppCompatActivity) context;
         super.onAttach(context);
     }
 

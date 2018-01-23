@@ -50,6 +50,9 @@ public class TriolionFragment extends BaseFragment {
 
     int page = 1;
 
+    public String busiCode = "300205";
+
+
     @Override
     protected int bindLayoutID() {
         return R.layout.fragment_hot;
@@ -111,7 +114,9 @@ public class TriolionFragment extends BaseFragment {
     private void request(int page) {
 
         Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
-        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+//        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
+        String url = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=" + busiCode + "&src=0000100001%7C6000003060";
+
         RequestParams params = new RequestParams(url);
 
         // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
