@@ -26,7 +26,7 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
+    <shishicai.com.dubo.weidet.BottomNavigationViewEx
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

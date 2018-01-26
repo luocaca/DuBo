@@ -1,6 +1,8 @@
 package shishicai.com.dubo.ui.hot;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +51,9 @@ public class HotFragment extends BaseFragment {
     @ViewInject(R.id.rvToDoList)
     RecyclerView rvToDoList;
 
+    @ViewInject(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
+
 
     @Override
     protected int bindLayoutID() {
@@ -79,6 +84,18 @@ public class HotFragment extends BaseFragment {
 
         getRandomImages();
 
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeLayout.setRefreshing(false);
+                        updateImages();
+                    }
+                }, 1000);
+            }
+        });
 
 
         if (scoreTypes == null) {
@@ -135,6 +152,10 @@ public class HotFragment extends BaseFragment {
 
     }
 
+    private void updateImages() {
+
+    }
+
     private void getRandomImages() {
 
 
@@ -142,16 +163,19 @@ public class HotFragment extends BaseFragment {
 //        mImages.add("http://img.500.com/upimages/sfc/201801/20180115151647_8177.jpg");
 //        mImages.add("http://img.500.com/upimages/sfc/201801/20180116174902_6717.jpg");
         mImages.add("https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0a9f67bc16950a7b6a3548c43ad0625c/c8ea15ce36d3d539f09733493187e950342ab095.jpg");
-        mImages.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4269230302,1228482053&fm=27&gp=0.jpg");
-        mImages.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4261164697,911028841&fm=27&gp=0.jpg");
+        mImages.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2132101975,1629625171&fm=27&gp=0.jpg");
+        mImages.add("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1018810789,3493444251&fm=27&gp=0.jpg");
         mImages.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1757478900,994367414&fm=27&gp=0.jpg");
 
 
-
+        mImagesFooter.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4054007864,2464688467&fm=27&gp=0.jpg");
+        mImagesFooter.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3429804250,3955383551&fm=27&gp=0.jpg");
+        mImagesFooter.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4264210756,3846931882&fm=27&gp=0.jpg");
 
     }
 
     private List<String> mImages = new ArrayList<>();
+    private List<String> mImagesFooter = new ArrayList<>();
     private View headView;
 
     private void addHeaderView() {
@@ -170,10 +194,10 @@ public class HotFragment extends BaseFragment {
     }
 
     private void addFootView() {
-        if (mImages != null && mImages.size() > 0) {
+        if (mImagesFooter != null && mImagesFooter.size() > 0) {
             headView = LayoutInflater.from(mActivity).inflate(R.layout.item_banner, (ViewGroup) rvToDoList.getParent(), false);
             Banner banner = (Banner) headView.findViewById(R.id.banner);
-            banner.setImages(mImages)
+            banner.setImages(mImagesFooter)
                     .setImageLoader(new GlideImageLoader())
                     .setDelayTime(5000)
                     .start();

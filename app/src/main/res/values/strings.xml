@@ -3,4 +3,6 @@
     <string name="title_home">热点资讯</string>
     <string name="title_dashboard">开奖中心</string>
     <string name="title_notifications">百科大全</string>
+
+    <string name="title_good">精彩推荐</string>
 </resources>

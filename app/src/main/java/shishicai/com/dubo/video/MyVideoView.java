@@ -113,6 +113,10 @@ public class MyVideoView extends RelativeLayout {
         initEvent();
     }
 
+    public void closeFull() {
+        fullIv.setVisibility(GONE);
+    }
+
     private void initSetting() {
         playOrPauseCenterIv.setImageResource(R.drawable.ic_play_circle_outline_white_48dp);
         showControLl();

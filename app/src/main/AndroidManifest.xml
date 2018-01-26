@@ -5,13 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-e
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ssc_logo_160"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/ssc_logo_160"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -24,7 +23,11 @@ e
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            />
         <activity android:name=".WebViewActivity" />
         <activity
             android:name=".WebActivity"

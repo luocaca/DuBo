@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -251,86 +252,17 @@ public class VideoFragment extends BaseFragment {
 
     List<VideoBean> videoBeans = new ArrayList<>();
 
+//    String url = "http://img3.imgtn.bdimg.com/it/u=488294629,1494955262&fm=27&gp=0.jpg";
+    String url = "http://images.zhcw.com/zhcw2011/video/v6/kaijiangzhibo.jpg";
+
     public List<VideoBean> conver2VideoBeans(List<HotNews.DataListBean> newsList) {
         for (HotNews.DataListBean dataListBean : newsList) {
-            VideoBean videoBean = new VideoBean(dataListBean.logoFile, "http://video1.zhcw.com/zhcw/app/csbb/cxjst20180122.mp4");
+            VideoBean videoBean = new VideoBean(!TextUtils.isEmpty(dataListBean.logoFile) ? dataListBean.logoFile : url, "http://video1.zhcw.com/zhcw/app/csbb/cxjst20180122.mp4");
             videoBeans.add(videoBean);
         }
 
         return videoBeans;
     }
-
-
-//
-//    private static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-//
-//        List<HotNews.DataListBean> mNewsList;
-//        Context mContext;
-//
-//        public MyAdapter(List<HotNews.DataListBean> newsList, Context context) {
-//            mNewsList = newsList;
-//            mContext = context;
-//        }
-//
-//        @Override
-//        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(mContext).inflate(R.layout.cardview_item_video, parent, false);
-//            return new MyViewHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(final MyViewHolder holder, final int position) {
-//            MyAnimator.runEnterAnimation(holder.itemView, position);
-//
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    WebViewActivity.initUrl = mNewsList.get(position).url;
-////                    WebViewActivity.start((Activity) mContext);
-////                    Log.i(TAG, "onClick: " + mNewsList.get(position).url);
-//                    holder.video.setVideoPath("http://video1.zhcw.com/zhcw/app/csbb/cxjst20180122.mp4");
-////                    holder.video.setBackgroundColor(0);
-//                    holder.video.start();
-////                    holder.video.setMediaController(new MyMediaController(mContext, holder.video, (Activity) mContext));
-////                    holder.video.setMediaController(new MyMediaController(mContext, holder.video, (Activity) mContext));
-//                }
-//            });
-////          holder.time.setText(mNewsList.get(position).publishDate);
-//            holder.content.setText(TextUtils.isEmpty(mNewsList.get(position).summary) ? "-" : mNewsList.get(position).summary);
-//            holder.t.setText(mNewsList.get(position).title);
-////            x.image().bind(holder.imageView, mNewsList.get(position).logoFile);
-//
-//            D.i("onBindViewHolder" + mNewsList.toString());
-//
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return mNewsList.size();
-//        }
-//    }
-//
-//
-//    public static class MyViewHolder extends RecyclerView.ViewHolder {
-//        TextView t;
-//        TextView time;
-//        TextView content;
-//        ImageView imageView;
-//
-//        VideoView video;
-//
-//        public MyViewHolder(View itemView) {
-//            super(itemView);
-//            t = itemView.findViewById(R.id.title);
-//            content = itemView.findViewById(R.id.content);
-//            time = itemView.findViewById(R.id.time);
-//            video = itemView.findViewById(R.id.video);
-//
-//
-//            imageView = itemView.findViewById(R.id.imageView);
-//
-//        }
-//    }
 
 
     private void showVideo(View view, final String videoPath) {
@@ -340,8 +272,11 @@ public class VideoFragment extends BaseFragment {
             videoRootViewFl.removeAllViews();
             videoRootViewFl.setVisibility(View.GONE);
         }
+
+
         if (videoView == null) {
             videoView = new MyVideoView(getContext());
+            videoView.closeFull();
             videoView.setListener(new MyVideoView.IFullScreenListener() {
                 @Override
                 public void onClickFull(boolean isFull) {

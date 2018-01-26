@@ -22,10 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shishicai.com.dubo.base.BaseFragment;
+import shishicai.com.dubo.ui.CenterFragment;
 import shishicai.com.dubo.ui.MeFragment;
 import shishicai.com.dubo.ui.MeFragmentDetail;
 import shishicai.com.dubo.ui.hot.HotFragment;
 import shishicai.com.dubo.ui.hot.news.NewsFragment;
+import shishicai.com.dubo.weidet.BottomNavigationViewEx;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FrameLayout content;
 
+    private BottomNavigationViewEx navigation;
+
 
     private Activity macActivity;
     FragmentTransaction ft;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     BaseFragment mefragment;
     BaseFragment mefragment1;
     BaseFragment mefragment2;
+    BaseFragment mefragment3;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -70,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
 //                    macActivity.getFragmentManager()
 //                    ft.show(mefragment2).commit();
                     setClick(2);
+
+//                    ft.add(R.id.content, mefragment).commit();
+
+
+                    return true;
+                case R.id.design_navigation_good:
+//                    macActivity.getFragmentManager()
+//                    ft.show(mefragment2).commit();
+                    setClick(3);
 
 //                    ft.add(R.id.content, mefragment).commit();
 
@@ -100,9 +114,11 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         container = (LinearLayout) findViewById(R.id.container);
         content = (FrameLayout) findViewById(R.id.content);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.enableShiftingMode(false);
+        navigation.enableItemShiftingMode(false);
 
     }
 
@@ -118,14 +134,14 @@ public class MainActivity extends AppCompatActivity {
         //开启事务
         ft = mFragmentManager.beginTransaction();
         //显示之前将所有的fragment都隐藏起来,在去显示我们想要显示的fragment
-        hideFragment(ft);
+//        hideFragment(ft);
         //显示之前将所有的fragment都隐藏起来,在去显示我们想要显示的fragment
         hideFragment(ft);
         switch (type) {
             case 0://王超
                 //如果王超的fragment是null的话,就创建一个
                 if (mefragment == null) {
-                    mefragment = new HotFragment();
+                    mefragment = new NewsFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment);
                 } else {
@@ -136,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 if (mefragment1 == null) {
 //                    mefragment1 = new CenterFragment();
-                    mefragment1 = new NewsFragment();
+                    mefragment1 = new HotFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment1);
                 } else {
@@ -154,6 +170,16 @@ public class MainActivity extends AppCompatActivity {
                     ft.show(mefragment2);
                 }
 
+                break;
+            case 3:
+                if (mefragment3 == null) {
+                    mefragment3 = new CenterFragment();
+                    //加入事务
+                    ft.add(R.id.content, mefragment3);
+                } else {
+                    //如果王超fragment不为空就显示出来
+                    ft.show(mefragment3);
+                }
                 break;
 
         }
@@ -178,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
         if (mefragment2 != null) {
             fragmentTransaction.hide(mefragment2);
         }
+        if (mefragment3 != null) {
+            fragmentTransaction.hide(mefragment3);
+        }
 
     }
 
@@ -188,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
         BaseFragment baseFragment = new MeFragmentDetail().newInstances(url);
 //        BaseFragment baseFragment = new TencentNewsFragment().newInstances(url);
-        baseFragments.add(0,baseFragment);
+        baseFragments.add(0, baseFragment);
 
         mFragmentManager.beginTransaction().addToBackStack("main")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -205,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         if (baseFragments.size() == 0) {
             super.onBackPressed();
         } else {
-            mFragmentManager.beginTransaction() .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).remove(baseFragments.get(0));
+            mFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).remove(baseFragments.get(0));
             baseFragments.remove(0);
             mFragmentManager.popBackStack();
         }

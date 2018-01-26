@@ -50,18 +50,18 @@ public class NewsFragment extends BaseFragment {
 
 
         titles.add("头条");
+        titles.add("视频");
         titles.add("公益");
         titles.add("资讯");
         titles.add("政策");
         titles.add("专辑");
-        titles.add("视频");
 
         fragments.add(new TopFragment());
+        fragments.add(new VideoFragment());
         fragments.add(new CommunityFragment());
         fragments.add(new TriolionFragment());
         fragments.add(new PolicyFragment());
         fragments.add(new SpecialFragment());
-        fragments.add(new VideoFragment());
 
     }
 
@@ -84,7 +84,7 @@ public class NewsFragment extends BaseFragment {
 
         MyAdapter myAdapter = new MyAdapter(fragments, titles, getChildFragmentManager());
 
-        viewPager.setOffscreenPageLimit(0);
+        viewPager.setOffscreenPageLimit(6);
 
         for (String title : titles) {
             tab_layout.addTab(tab_layout.newTab().setText(title));
@@ -92,8 +92,6 @@ public class NewsFragment extends BaseFragment {
         tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
         viewPager.setAdapter(myAdapter);
         tab_layout.setupWithViewPager(viewPager);
-
-
     }
 
 
