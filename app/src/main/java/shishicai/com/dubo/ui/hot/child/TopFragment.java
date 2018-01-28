@@ -1,34 +1,39 @@
 package shishicai.com.dubo.ui.hot.child;
 
-import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import shishicai.com.dubo.R;
-import shishicai.com.dubo.WebViewActivity;
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.model.HotNews;
+import shishicai.com.dubo.transition.DetailTransition;
+import shishicai.com.dubo.ui.hot.news.NewsDetailFragment;
 import shishicai.com.dubo.util.D;
 import shishicai.com.dubo.util.GsonUtil;
 import shishicai.com.dubo.util.MyAnimator;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * 头条
@@ -36,6 +41,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class TopFragment extends BaseFragment {
+
+    private static final String TAG = "TopFragment";
 
     String host = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
 
@@ -45,6 +52,12 @@ public class TopFragment extends BaseFragment {
 
     public String busiCode = "300203";
 
+    @ViewInject(R.id.content)
+    FrameLayout content;
+
+//    public boolean isPrepared = false;
+
+
     int page = 1;
 
     @Override
@@ -53,10 +66,33 @@ public class TopFragment extends BaseFragment {
     }
 
 
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        isPrepared = true;
+//        loadData();
+//    }
+
     @Override
     protected void initView(final View rootView) {
 
-        this.rootView = rootView;
+//        rootView.findViewById(R.id.load).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                WebActivity.start(getActivity());
+//            }
+//        });
+
+
+    }
+
+    @Override
+    protected void loadData() {
+
+////
+//        if (!isPrepared) {
+//            return;
+//        }
 
         rvToDoList = rootView.findViewById(R.id.rvToDoList);
 
@@ -82,8 +118,6 @@ public class TopFragment extends BaseFragment {
                             && visibleItemCount > 0) {
                         //加载更多
                         request(page++);
-
-
                     }
                 } catch (Exception e) {
                     Log.w(TAG, "onScrollStateChanged: " + e.getMessage());
@@ -95,26 +129,29 @@ public class TopFragment extends BaseFragment {
         });
 
 
-//        rootView.findViewById(R.id.load).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                WebActivity.start(getActivity());
-//            }
-//        });
-
-
-    }
-
-    @Override
-    protected void loadData() {
+//        request(page++);
         request(page++);
+
     }
+
+//    @Override
+//    protected void onVisible() {
+//        super.onVisible();
+//
+//    }
 
     private void request(int page) {
 
         D.e("========request===========");
 
-//        Snackbar.make(rootView, "加载中新数据....", Toast.LENGTH_SHORT).show();
+//        Snackbar.make(content, "加载中新数据....", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(mActivity, content + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, rootView + "", Toast.LENGTH_SHORT).show();
+        Log.e(TAG, "request: content" + content);
+        Log.e(TAG, "request: rootView" + rootView);
+
+
 //        String host = "http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=1&pageSize=20&busiCode=300205&src=0000100001%7C6000003060";
 
         //            http://m.zhcw.com/clienth5.do?transactionType=8021&pageNo=" + page + "&pageSize=20&busiCode=300203&src=0000100001%7C6000003060
@@ -134,6 +171,7 @@ public class TopFragment extends BaseFragment {
                 setDatas(hotNews.dataList);
 //                WebActivity.start(SplashActivity.this);
                 D.i("====================json===============\n" + GsonUtil.formatJson2String(result));
+                Snackbar.make(rvToDoList, "加载成功....", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -174,7 +212,7 @@ public class TopFragment extends BaseFragment {
     }
 
 
-    static class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         List<HotNews.DataListBean> mNewsList;
         Context mContext;
@@ -210,11 +248,48 @@ public class TopFragment extends BaseFragment {
         public void onBindViewHolder(final MyViewHolder holder, final int position) {
             MyAnimator.runEnterAnimation(holder.itemView, position);
 
+            ViewCompat.setTransitionName(holder.imageView, String.valueOf(position) + "_image");
+
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    WebViewActivity.initUrl = mNewsList.get(position).url;
-                    WebViewActivity.start((Activity) mContext);
+//                    WebViewActivity.initUrl = mNewsList.get(position).url;
+//                    WebViewActivity.start((Activity) mContext);
+                    NewsDetailFragment.imageUrl = mNewsList.get(position).logoFile;
+                    NewsDetailFragment.title = mNewsList.get(position).title;
+                    NewsDetailFragment.contentUrl = mNewsList.get(position).url;
+                    BaseFragment fragment = NewsDetailFragment.newInstance();
+
+                    // 把每个图片视图设置不同的Transition名称, 防止在一个视图内有多个相同的名称, 在变换的时候造成混乱
+                    // Fragment支持多个View进行变换, 使用适配器时, 需要加以区分
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        fragment.setSharedElementEnterTransition(new DetailTransition());
+                        fragment.setExitTransition(new Fade());
+                        fragment.setEnterTransition(new Fade());
+                        fragment.setSharedElementReturnTransition(new DetailTransition());
+
+//                        ViewCompat.setTransitionName(holder.imageView, "share");
+                        getActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .addSharedElement(holder.imageView, "share")
+                                .addToBackStack(null)
+                                .replace(android.R.id.content, fragment)
+                                .commit();
+                    }
+
+
+                    /**
+                     *  getFragmentManager()
+                     .beginTransaction()
+                     .addSharedElement(imageView,"simple transition name")
+                     .addToBackStack(TAG)
+                     .replace(R.id.activity_main, fragmentB)
+                     .commit();
+                     */
+
 
                     Log.i(TAG, "onClick: " + mNewsList.get(position).url);
                 }

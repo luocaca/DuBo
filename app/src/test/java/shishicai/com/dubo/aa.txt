@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>极品美女</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="robots" content="all">
+  <meta name="keywords" content="极品美女">
+  <meta name="description" content="极品美女">
+  <link type="text/css" rel="stylesheet" href="/css/style.css">
+ </head>
+ <body>
+  <script type="text/javascript" src="/js/config.js"></script>
+  <div id="header_box"></div>
+  <div id="top_box"></div>
+  <div class="wrap mt20">
+   <div class="box cat_pos clearfix">
+    <div align="center">
+     <font color="#FF0000" style="font-size:18px"><b>本版块所有内容都是精选整理其他网站VIP资源，现免费给发布出来！</b></font>
+    </div>
+   </div>
+  </div>
+  <div class="wrap mt20">
+   <table width="950" border="0" align="center">
+    <tbody>
+     <tr>
+      <td><a href="/htm/girllist10/" target="_blank"><img src="https://gg.385gg.com/girl/推女郎写真.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/tubaobao.htm" target="_blank"><img src="https://gg.385gg.com/girl/tubaobao.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist16/" target="_blank"><img src="https://gg.385gg.com/girl/假面女皇写真.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist15/" target="_blank"><img src="https://gg.385gg.com/girl/pantyhose.gif" height="300" width="235"></a></td>
+     </tr>
+     <tr>
+      <td><a href="/htm/girllist8/" target="_blank"><img src="https://gg.385gg.com/girl/美媛馆新刊.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist7/" target="_blank"><img src="https://gg.385gg.com/girl/波萝社.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist6/" target="_blank"><img src="https://gg.385gg.com/girl/模范学院.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist5/" target="_blank"><img src="https://gg.385gg.com/girl/嗲囡囡.gif" height="300" width="235"></a></td>
+     </tr>
+     <tr>
+      <td><a href="/htm/girllist13/" target="_blank"><img src="https://gg.385gg.com/girl/头条女神.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist14/" target="_blank"><img src="https://gg.385gg.com/girl/魅妍社.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist18/" target="_blank"><img src="https://gg.385gg.com/girl/3Agirl.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist17/" target="_blank"><img src="https://gg.385gg.com/girl/优星馆.gif" height="300" width="235"></a></td>
+     </tr>
+     <tr>
+      <td><a href="/htm/girllist4/" target="_blank"><img src="https://gg.385gg.com/girl/秀人网.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist3/" target="_blank"><img src="https://gg.385gg.com/girl/爱蜜社.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist2/" target="_blank"><img src="https://gg.385gg.com/girl/推女神.gif" height="300" width="235"></a></td>
+      <td><a href="/htm/girllist1/" target="_blank"><img src="https://gg.385gg.com/girl/V女郎.gif" height="300" width="235"></a></td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="clear"></div>
+   <div class="pagination">
+    <a href="index.htm">首页</a>
+    <a href="/htm/girlclass/1.htm" target="_parent">上一页</a>
+    <strong>1</strong>
+    <a href="/htm/girlclass/1.htm" target="_parent">下一页</a>
+    <a href="1.htm">尾页</a>
+   </div>
+  </div>
+  <div id="bottom_box"></div>
+  <div id="footer_box"></div>
+  <script type="text/javascript" src="/js/layout.js"></script>
+  <div style="display:none">
+   <script type="text/javascript" src="/js/tj.htm"></script>
+  </div>
+ </body>
+</html>

@@ -91,6 +91,7 @@ public class SplashActivity extends AppCompatActivity {
 //        params.addQueryStringParameter("appid", "1801021341");
         // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
         params.setCacheMaxAge(1000 * 60 * 24 * 3);
+        params.setConnectTimeout(3000);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override

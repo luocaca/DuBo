@@ -4,8 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
-
-    <dimen name="toolBarPaddingTop">0dp</dimen>
-    <dimen name="toolBarHeight">50dp</dimen>
-
+    <dimen name="toolBarPaddingTop">25dp</dimen>
+    <dimen name="toolBarHeight">80dp</dimen>
 </resources>

@@ -3,6 +3,7 @@ package shishicai.com.dubo.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
@@ -32,10 +33,14 @@ public abstract class BaseFragment extends Fragment {
 
     protected LoadingLayout loadingLayout;
     private View loadPage;
+    public boolean isPrepared;
 
 //    public boolean ismIsVisible() {
 //        return mIsVisible;
 //    }
+
+    protected abstract int bindLayoutID();
+
 
     @Nullable
     @Override
@@ -52,6 +57,15 @@ public abstract class BaseFragment extends Fragment {
         initView(inflater, container, savedInstanceState);
 
         return rootView;
+    }
+
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isPrepared = true;
+        loadData();
     }
 
     protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,6 +106,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void onVisible() {
+        if (!isPrepared)return;
         loadData();
     }
 
@@ -102,6 +117,7 @@ public abstract class BaseFragment extends Fragment {
      * 在 onActivityCreated 之后第一次显示加载数据，只加载一次
      */
     protected void loadData() {
+
 
 
     }
@@ -118,13 +134,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initView(View rootView);
 
-    protected abstract int bindLayoutID();
 
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
 
     /**
@@ -141,5 +152,10 @@ public abstract class BaseFragment extends Fragment {
         return (T) view;
     }
 
+
+    public void showSnackBar(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
+
+    }
 
 }

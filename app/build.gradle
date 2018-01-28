@@ -3,6 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
+
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    //禁止Gradle检查PNG的合法性
+
     defaultConfig {
         applicationId "shishicai.com.dubo"
         minSdkVersion 14

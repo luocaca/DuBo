@@ -68,11 +68,19 @@ public class HotFragment extends BaseFragment {
         rvToDoList.setLayoutManager(gridLayoutManager);
         rvToDoList.setItemAnimator(new DefaultItemAnimator());
         setDatas();
+
+
+            showSnackBar("viziable");
+
     }
 
     @Override
     protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.initView(inflater, container, savedInstanceState);
+
+
+
+
 
     }
 
@@ -279,6 +287,13 @@ public class HotFragment extends BaseFragment {
             this.res = res;
         }
     }
+
+    @Override
+    protected void onVisible() {
+        super.onVisible();
+        showSnackBar("viziable");
+    }
+
 
 
 }
