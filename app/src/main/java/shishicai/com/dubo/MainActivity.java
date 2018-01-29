@@ -25,7 +25,7 @@ import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.ui.CenterFragment;
 import shishicai.com.dubo.ui.MeFragment;
 import shishicai.com.dubo.ui.MeFragmentDetail;
-import shishicai.com.dubo.ui.hot.HotFragment;
+import shishicai.com.dubo.ui.hot.PaiLieFragment;
 import shishicai.com.dubo.ui.hot.news.NewsFragment;
 import shishicai.com.dubo.weidet.BottomNavigationViewEx;
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 if (mefragment1 == null) {
 //                    mefragment1 = new CenterFragment();
-                    mefragment1 = new HotFragment();
+                    mefragment1 = new PaiLieFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment1);
                 } else {

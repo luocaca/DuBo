@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">时时彩资讯</string>
     <string name="title_home">热点资讯</string>
-    <string name="title_dashboard">开奖中心</string>
+    <string name="title_dashboard">晚期开奖</string>
     <string name="title_notifications">百科大全</string>
 
     <string name="title_good">精彩推荐</string>
+    <string name="share_contents">来自「时时彩资讯」的分享：%1$s %2$s</string>
+    <string name="share">分享</string>
+
 </resources>

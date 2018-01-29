@@ -3,12 +3,12 @@ package shishicai.com.dubo.ui.hot.child;
 import android.content.Context;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +29,6 @@ import java.util.List;
 import shishicai.com.dubo.R;
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.model.HotNews;
-import shishicai.com.dubo.transition.DetailTransition;
 import shishicai.com.dubo.ui.hot.news.NewsDetailFragment;
 import shishicai.com.dubo.util.D;
 import shishicai.com.dubo.util.GsonUtil;
@@ -265,16 +264,17 @@ public class TopFragment extends BaseFragment {
                     // Fragment支持多个View进行变换, 使用适配器时, 需要加以区分
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        fragment.setSharedElementEnterTransition(new DetailTransition());
-                        fragment.setExitTransition(new Fade());
-                        fragment.setEnterTransition(new Fade());
-                        fragment.setSharedElementReturnTransition(new DetailTransition());
+//                        fragment.setSharedElementEnterTransition(new DetailTransition());
+//                        fragment.setExitTransition(new Fade());
+//                        fragment.setEnterTransition(new Fade());
+//                        fragment.setSharedElementReturnTransition(new DetailTransition());
 
 //                        ViewCompat.setTransitionName(holder.imageView, "share");
                         getActivity()
                                 .getSupportFragmentManager()
                                 .beginTransaction()
-                                .addSharedElement(holder.imageView, "share")
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+//                                .addSharedElement(holder.imageView, getString(R.string.share))
                                 .addToBackStack(null)
                                 .replace(android.R.id.content, fragment)
                                 .commit();

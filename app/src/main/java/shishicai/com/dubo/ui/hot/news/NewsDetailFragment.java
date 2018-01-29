@@ -1,11 +1,13 @@
 package shishicai.com.dubo.ui.hot.news;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.transition.TransitionInflater;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -53,6 +55,10 @@ public class NewsDetailFragment extends BaseFragment {
     @ViewInject(R.id.webview)
     WebView webview;
 
+    @ViewInject(R.id.fab)
+    FloatingActionButton fab;
+
+
     public static NewsDetailFragment newInstance() {
 
         return new NewsDetailFragment();
@@ -76,6 +82,18 @@ public class NewsDetailFragment extends BaseFragment {
                     TransitionInflater.from(getContext())
                             .inflateTransition(android.R.transition.move));
         }
+
+        fab.setOnClickListener(v -> {
+            if (contentUrl == null) {
+                contentUrl = "";
+            }
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share));
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_contents, title, contentUrl));
+            startActivity(Intent.createChooser(intent, title));
+        });
+
 //        toolbarL.setDisplayHomeAsUpEnabled(true);
         AppCompatActivity compatActivity = (AppCompatActivity) getActivity();
         compatActivity.setSupportActionBar(toolbar);
@@ -98,9 +116,9 @@ public class NewsDetailFragment extends BaseFragment {
 
                     String co = document.getElementsByClass("wzxq").first().toString();
 //                    text.setText(Html.fromHtml());
-                    showSnackBar(co);
-                    webview.loadData(co, "text/html", "UTF-8"); // 加载定义的代码，并设定编码格式和字符集。
-
+//                    showSnackBar(co);
+//                    webview.loadData(co, "text/html", "UTF-8"); // 加载定义的代码，并设定编码格式和字符集。
+                    webview.loadUrl(contentUrl);
 
                 });
             } catch (IOException e) {
@@ -123,11 +141,14 @@ public class NewsDetailFragment extends BaseFragment {
     protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.initView(inflater, container, savedInstanceState);
 
+        startPostponedEnterTransition();
+
         x.image().bind(share,
                 imageUrl, new Callback.CacheCallback<Drawable>() {
                     @Override
                     public void onSuccess(Drawable result) {
 //                        share.setImageDrawable(result);
+
                         startPostponedEnterTransition();
                     }
 
@@ -143,7 +164,7 @@ public class NewsDetailFragment extends BaseFragment {
 
                     @Override
                     public void onFinished() {
-
+                        startPostponedEnterTransition();
                     }
 
                     @Override
@@ -205,21 +226,23 @@ public class NewsDetailFragment extends BaseFragment {
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 Log.i(TAG, "action android selected");
-                showSnackBar("navigation_home");
+//                showSnackBar("navigation_home");
                 return true;
             case R.id.navigation_dashboard:
                 Log.i(TAG, "action favourite selected");
-                showSnackBar("navigation_dashboard");
+//                showSnackBar("navigation_dashboard");
                 return true;
             case R.id.navigation_notifications:
                 Log.i(TAG, "action settings selected");
-                showSnackBar("navigation_notifications");
+//                showSnackBar("navigation_notifications");
                 return true;
 
             case android.R.id.home:
 
-                showSnackBar("back");
+//                showSnackBar("back");
+//                getChildFragmentManager().popBackStack();
 
+                getActivity().getSupportFragmentManager().popBackStack();
                 return true;
 
 

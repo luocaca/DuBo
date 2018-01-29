@@ -115,12 +115,12 @@ public class CoreRecyclerView extends LinearLayout implements BaseQuickAdapter.R
 
     @Override
     public void onRefresh() {
-        page = 0;
+        page = 1;
 //      mQuickAdapter.getData().clear();
 //      mQuickAdapter.notifyDataSetChanged();//如果直接刷新会闪一下
 //        datasState = REFRESH;//刷新时
         mQuickAdapter.setDatasState(REFRESH);
-        addDataListener.addData(0);
+        addDataListener.addData(1);
         if (refreshListener != null) {
             refreshListener.refresh();
         }
