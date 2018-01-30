@@ -15,13 +15,13 @@ import java.util.List;
 import shishicai.com.dubo.R;
 import shishicai.com.dubo.adapter.ViewPagerAdapter;
 import shishicai.com.dubo.base.BaseFragment;
-import shishicai.com.dubo.ui.hot.PaiLieChild.ItemFragment;
+import shishicai.com.dubo.ui.MeFragment;
 
 /**
- * 排列中奖号码  界面  第二个界面
+ * 把 me 跟 第二个界面  合并
  */
 
-public class PaiLieFragment extends BaseFragment {
+public class TwoMeFragment extends BaseFragment {
 
 
     @ViewInject(R.id.viewpager)
@@ -37,13 +37,13 @@ public class PaiLieFragment extends BaseFragment {
     public void initList() {
 
 
-        titles.add("双色球");
-        titles.add("福彩3");
-        titles.add("7彩乐");
+        titles.add("百科大全");
+        titles.add("体彩资讯");
 
-        fragments.add(ItemFragment.newInstances("FC_SSQ"));//时时彩
-        fragments.add(ItemFragment.newInstances("FC_3D"));//福彩 3D
-        fragments.add(ItemFragment.newInstances("FC_QLC"));//七彩乐
+
+        fragments.add(new MeFragment());//时时彩
+        fragments.add(new HotFragment());//福彩 3D
+
 
     }
 
@@ -51,8 +51,8 @@ public class PaiLieFragment extends BaseFragment {
     List<BaseFragment> fragments = new ArrayList<BaseFragment>();
 
 
-    public static PaiLieFragment newInstancse() {
-        return new PaiLieFragment();
+    public static TwoMeFragment newInstancse() {
+        return new TwoMeFragment();
     }
 
 

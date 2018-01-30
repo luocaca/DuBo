@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,11 @@ public abstract class BaseFragment extends Fragment {
 
     protected LoadingLayout loadingLayout;
     private View loadPage;
-    public boolean isPrepared;
+
+
+    public boolean mIsPrepared = false;
+    public boolean isFirst = true;
+
 
 //    public boolean ismIsVisible() {
 //        return mIsVisible;
@@ -60,35 +65,24 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isPrepared = true;
-        loadData();
+//        isPrepared = true;
+//        loadData();
+
+
     }
+
 
     protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     }
 
-    ;
-
-
     protected void initListener() {
 
     }
 
-
-    public int bindLoadingLayout() {
-        return 0;
-    }
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     /**
      * 在这里实现Fragment数据的缓加载.
@@ -105,8 +99,18 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    private static final String TAG = "BaseFragment";
+
     protected void onVisible() {
-        if (!isPrepared)return;
+//        if (!isPrepared)return;
+
+        if (!mIsVisible || !mIsPrepared || !isFirst) {
+            Log.e(TAG, "不加载数据 mIsVisible=" + mIsVisible + "  mIsPrepared=" + mIsPrepared + " isFirst = " + isFirst);
+            return;
+        } else {
+            Log.e(TAG, "加载数据" + mIsVisible + "  mIsPrepared=" + mIsPrepared + " isFirst = " + isFirst);
+        }
+
         loadData();
     }
 
@@ -116,10 +120,22 @@ public abstract class BaseFragment extends Fragment {
      * 生命周期会先执行 setUserVisibleHint 再执行onActivityCreated
      * 在 onActivityCreated 之后第一次显示加载数据，只加载一次
      */
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: ");
+        mIsPrepared = true;
+        /**
+         * 因为启动时先走loadData()再走onActivityCreated，
+         * 所以此处要额外调用load(),不然最初不会加载内容
+         */
+        loadData();
+    }
+
+
     protected void loadData() {
-
-
-
+        isFirst = false;
     }
 
     protected void onInvisible() {
@@ -133,9 +149,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract void initView(View rootView);
-
-
-
 
 
     /**

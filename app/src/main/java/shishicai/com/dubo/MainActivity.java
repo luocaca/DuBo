@@ -23,9 +23,9 @@ import java.util.List;
 
 import shishicai.com.dubo.base.BaseFragment;
 import shishicai.com.dubo.ui.CenterFragment;
-import shishicai.com.dubo.ui.MeFragment;
 import shishicai.com.dubo.ui.MeFragmentDetail;
 import shishicai.com.dubo.ui.hot.PaiLieFragment;
+import shishicai.com.dubo.ui.hot.TwoMeFragment;
 import shishicai.com.dubo.ui.hot.news.NewsFragment;
 import shishicai.com.dubo.weidet.BottomNavigationViewEx;
 
@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 if (mefragment2 == null) {
-                    mefragment2 = new MeFragment();
+                    mefragment2 = new TwoMeFragment();
+//                    mefragment2 = new MeFragment();
                     //加入事务
                     ft.add(R.id.content, mefragment2);
                 } else {

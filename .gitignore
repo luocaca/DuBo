@@ -11,3 +11,6 @@
 /.idea/
 app/libs/
 app/release/
+libs/
+release/
+src/main/java/shishicai/com/dubo/weidet/dialog/

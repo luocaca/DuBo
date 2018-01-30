@@ -89,9 +89,9 @@ public class TopFragment extends BaseFragment {
     protected void loadData() {
 
 ////
-//        if (!isPrepared) {
-//            return;
-//        }
+        if (!mIsVisible) {
+            return;
+        }
 
         rvToDoList = rootView.findViewById(R.id.rvToDoList);
 
@@ -145,8 +145,8 @@ public class TopFragment extends BaseFragment {
 
 //        Snackbar.make(content, "加载中新数据....", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(mActivity, content + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(mActivity, rootView + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, content + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, rootView + "", Toast.LENGTH_SHORT).show();
         Log.e(TAG, "request: content" + content);
         Log.e(TAG, "request: rootView" + rootView);
 

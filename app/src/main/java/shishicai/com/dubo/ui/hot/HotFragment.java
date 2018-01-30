@@ -291,7 +291,7 @@ public class HotFragment extends BaseFragment {
     @Override
     protected void onVisible() {
         super.onVisible();
-        showSnackBar("viziable");
+//        showSnackBar("viziable");
     }
 
 
