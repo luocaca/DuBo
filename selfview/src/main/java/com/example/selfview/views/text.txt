@@ -1,0 +1,134 @@
+
+ <code>public static class MeasureSpec {
+     private static final int MODE_SHIFT = 30;
+     private static final int MODE_MASK  = 0x3 << MODE_SHIFT;
+     public static final int UNSPECIFIED = 0 << MODE_SHIFT;
+     public static final int EXACTLY     = 1 << MODE_SHIFT;
+     public static final int AT_MOST     = 2 << MODE_SHIFT;
+     public static int makeMeasureSpec(int size, int mode) {
+         if (sUseBrokenMakeMeasureSpec) {
+             return size + mode;
+         } else {
+             return (size & ~MODE_MASK) | (mode & MODE_MASK);
+                                          ( 同一为一 )&  --- >  1的二进制为:0001
+                                                    2的二进制为:0010
+                                                    运算的结果为:0000 ->0
+                                                    同理两个1的&运算的二进制结果为0001->结果为1
+         }
+     }
+     public static int getMode(int measureSpec) {
+         return (measureSpec & MODE_MASK);
+     }
+     public static int getSize(int measureSpec) {
+         return (measureSpec & ~MODE_MASK);
+     }
+ }
+ </code>
+
+
+ <code class=" hljs java">
+ 这里我把里面一些我认为没必要的代码都去掉了，只留了以上几行代码，这样看起来很清晰，也非常容易理解。
+ 我们先做个转化，把上面几个成员变量转化成二进制
+
+ 这个就不需要转化了，这里代表的只是一个移动的位置，也就是一个单纯的数字
+ private static final int MODE_SHIFT = 0000 0000 0000 0000 0000 0000 0000 0011;  ---->  0x3 << 30
+ 0x3 就是 11 左移30位 ，就是补30个0；    ||||||
+ private static final int MODE_MASK  = 1100 0000 0000 0000 0000 0000 0000 0000 ;
+ 00 左移30位
+ public static final int UNSPECIFIED = 0000 0000 0000 0000 0000 0000 0000 0000 ;
+ 01 左移30位
+ public static final int EXACTLY     = 0100 0000 0000 0000 0000 0000 0000 0000 ;
+ 10 左移30位
+ public static final int AT_MOST     = 1000 0000 0000 0000 0000 0000 0000 0000 ;
+
+ 你就会问了，这样写有什么好处呢？ 细心的人看了上面这几个方法就明白了，每个方法中都有一个 & 的操作，所以我们接下来看看这集几个方法的含义是什么，先从下往上看，先易后难
+  1、       public static int getSize(int measureSpec) {
+             return (measureSpec & ~MODE_MASK);
+         }
+  顾名思义，通过measureSpec这个参数，获取size ，两个都是int类型，怎么通过一个int类型的数获取另一个int类型的数。我们在学习java的时候知道，一个int类型是32位，任何int类型的数都是有32位，比如一个int类型的数值3，它也是占有32位，只是高30位全部为0。google 也是利用这一点，让这个int类型的measureSpec数存了两个信息，一个就是size，保存在int类型的低30位，另一个就是mode，保存在int类型的高2位。前面我们看到了有几个成员变量，UNSPECIFIED，EXACTLY，AT_MOST
+  者就是mode的三种选择，目前也只有这三种选择，所以只需要2位就能实现。
+  2、      ` public static int getMode(int measureSpec) {
+                 return (measureSpec & MODE_MASK);
+         }`
+   这也好理解，获取模式，但这些模式有啥用处呢？
+   1）、EXACTLY 模式： 准确的、精确的；这种模式，是最容易理解和处理的，可以理解为大小固定，比如在定义layout_width的时候，定义为固定大小 10dp，20dp，或者match_parent(此时父控件是固定的)这时候，获取出来的mode就是EXACTLY
+   2）、AT_MOST 模式： 最大的；这种模式稍微难处理些，不过也好理解，就是View的大小最大不能超过父控件，超过了，取父控件的大小，没有，则取自身大小，这种情况一般都是在layout_width设为warp_content时。
+   3）、UNSPECIFIED 模式：不指定大小，这种情况，我们几乎用不上，它是什么意思呢，就是View的大小想要多大，就给多大，不受父View的限制，几个例子就好理解了，ScrollView控件就是。
+
+   3、        `public static int makeMeasureSpec(int size, int mode) {
+               if (sUseBrokenMakeMeasureSpec) {
+                   return size + mode;
+               } else {
+                   return (size & ~MODE_MASK) | (mode & MODE_MASK);
+               }
+           }`
+   这个方法也好理解，封装measureSpec的值，在定义一个View的大小时，我们只是固定了大小，你下次想要获取mode的时候，肯定无法拿到，所以就得自己把模式添加进去，这个方法，在自定义View中，也基本不需要用到，他所使用的场所，是在设置子View的大小的时候需要用到，所以如果是自定义ViewGroup的话，就需要用到。
+
+   感觉讲了这么多，还是不知道怎么使用，接下来就来重写onMeasure（）方法，写完之后，你就明白了，这里把注解下载代码里头。
+ </code>
+
+
+
+<code>  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+     //这里方法套路都是一样，不管三七 二十一，上来就先把mode 和 size 获取出来。
+
+      int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+      int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+      int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+      int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+      //View 真正需要显示的大小
+      int width = 0, height = 0;
+      //这里是去测量字体大小
+      measureText();
+      //字体宽度加图片宽度取最大宽度，这里因为字体和图片是上下排列
+      int contentWidth = Math.max(mBoundText.width(), mIconNormal.getWidth());
+     // 我们渴望得到的宽度
+      int desiredWidth = getPaddingLeft() + getPaddingRight() + contentWidth;
+      //重点来了，判断模式，这个模式哪里来的呢，就是在编写xml的时候，设置的layout_width
+      switch (widthMode) {
+      //如果是AT_MOST，不能超过父View的宽度
+          case MeasureSpec.AT_MOST:
+              width = Math.min(widthSize, desiredWidth);
+              break;
+              //如果是精确的，好说，是多少，就给多少；
+          case MeasureSpec.EXACTLY:
+              width = widthSize;
+              break;
+              //这种情况，纯属在这里打酱油的，可以不考虑
+          case MeasureSpec.UNSPECIFIED://我是路过的
+              width = desiredWidth;
+              break;
+      }
+      int contentHeight = mBoundText.height() + mIconNormal.getHeight();
+      int desiredHeight = getPaddingTop() + getPaddingBottom() + contentHeight;
+      switch (heightMode) {
+          case MeasureSpec.AT_MOST:
+              height = Math.min(heightSize, desiredHeight);
+              break;
+          case MeasureSpec.EXACTLY:
+              height = heightSize;
+              break;
+          case MeasureSpec.UNSPECIFIED:
+              height = contentHeight;
+              break;
+      }
+      //最后不要忘记了，调用父类的测量方法
+      setMeasuredDimension(width, height);
+  }
+</code>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

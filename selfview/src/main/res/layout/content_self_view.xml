@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.selfview.views.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:luocaca="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.example.selfview.MainActivity"
+
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:max="10"
+        android:progress="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <TextView
+        android:id="@+id/tv_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.example.selfview.views.MView
+        android:id="@+id/my_view"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_center"
+        app:layout_constraintTop_toBottomOf="@+id/tv_center"
+        android:background="@color/colorPrimary"
+        />
+
+
+    <com.example.selfview.views.MyView
+        android:id="@+id/myview_other"
+        android:layout_width="94dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="TextView"
+        app:default_size="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_center"
+        app:layout_constraintEnd_toStartOf="@+id/tv_center" />
+
+
+</com.example.selfview.views.MyViewGroup>

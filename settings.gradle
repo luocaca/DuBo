@@ -1,1 +1,1 @@
-include ':app',  ':xxlib'
+include ':app',  ':xxlib', ':selfview'
