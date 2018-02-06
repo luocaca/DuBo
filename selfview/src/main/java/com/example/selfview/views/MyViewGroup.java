@@ -87,7 +87,18 @@ public class MyViewGroup extends ViewGroup {
     //step 1  实现测量子View大小以及设定ViewGroup的大小：
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+//        int expandSpec = MeasureSpec.makeMeasureSpec(heightMeasureSpec,
+//                );
+        /**
+         * 	int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+         MeasureSpec.AT_MOST);
+         super.onMeasure(widthMeasureSpec, expandSpec);
+         */
+
+        final int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.EXACTLY);
+        super.onMeasure(widthMeasureSpec, childHeightMeasureSpec);
 
         //将所有的子View 进行测量，这会触发每个子View的onMeasure 函数
         //注意要与measureChild 区分，measureChild 是对单个view进行测量
@@ -101,6 +112,31 @@ public class MyViewGroup extends ViewGroup {
 
         int childCount = getChildCount();
 
+
+//        if (getChildCount() > 0) {
+//            final View child = getChildAt(0);
+//            final int widthPadding;
+//            final int heightPadding;
+//            final int targetSdkVersion = getContext().getApplicationInfo().targetSdkVersion;
+//            final ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) child.getLayoutParams();
+//            if (targetSdkVersion >= Build.VERSION_CODES.M) {
+//                widthPadding = getPaddingLeft() + getPaddingRight();
+//                heightPadding = getPaddingTop() + getPaddingBottom() ;
+//            } else {
+//                widthPadding = getPaddingLeft() + getPaddingRight();
+//                heightPadding = getPaddingTop() + getPaddingBottom();
+//            }
+//
+//            final int desiredHeight = getMeasuredHeight() - heightPadding;
+//            if (child.getMeasuredHeight() < desiredHeight) {
+//                final int childWidthMeasureSpec = getChildMeasureSpec(
+//                        widthMeasureSpec, widthPadding, lp.width);
+//                final int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
+//                        desiredHeight, MeasureSpec.EXACTLY);
+//                child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+//            }
+//        }
+
         if (childCount == 0) {
             //如果没有ziView ， 当前 ViewGroup 没有存在的意义，不用占用空间
             setMeasuredDimension(0, 0);
@@ -112,12 +148,15 @@ public class MyViewGroup extends ViewGroup {
                 int width = getMaxChildWidth();
             } else if (heightMode == MeasureSpec.AT_MOST) {//如果高度自适应
                 //宽度设置为ViewGroup 自己的测量宽度 ， 高度设置为所有子View 的总和
+//                setMeasuredDimension(widthSize, MeasureSpec.makeMeasureSpec(getTotleHeight(), MeasureSpec.UNSPECIFIED));
                 setMeasuredDimension(widthSize, getTotleHeight());
             } else if (widthMode == MeasureSpec.AT_MOST) {
                 //宽度设置为子view 中宽度最大的值，高度设置为 ViewGroup 自己的测量值
                 setMeasuredDimension(getMaxChildWidth(), heightSize);
             }
         }
+
+
     }
 
 

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -25,6 +25,11 @@
     <declare-styleable name="MyView">
         <!-- 声明我们的属性， 名称为 default_size , 取值类型为 尺寸类型 (dp,px 等) -->
         <attr name="default_size" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MView">
+        <!-- 声明我们的属性， 名称为 default_size , 取值类型为 尺寸类型 (dp,px 等) -->
+        <attr name="text" format="string|reference" />
     </declare-styleable>
 
 

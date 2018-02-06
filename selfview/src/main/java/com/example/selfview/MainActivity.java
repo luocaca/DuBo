@@ -1,15 +1,23 @@
 package com.example.selfview;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import com.example.selfview.views.MView;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,11 +27,25 @@ public class MainActivity extends AppCompatActivity {
 
     SeekBar seekBar2;
 
+    private ImageButton ivButton;
+    private ImageButton ivButton1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
+
+        ivButton1 = (ImageButton) findViewById(R.id.ivButton);
+
+
+        ivButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable src = ivButton1.getDrawable();
+                ivButton1.setImageDrawable(tintDrawable(src, ColorStateList.valueOf(getRandomColor())));
+            }
+        });
 
         seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -96,4 +118,27 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
+        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
+    }
+
+
+    public int getRandomColor() {
+        String r, g, b;
+        Random random = new Random();
+        r = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        g = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        b = Integer.toHexString(random.nextInt(256)).toUpperCase();
+
+        r = r.length() == 1 ? "0" + r : r;
+        g = g.length() == 1 ? "0" + g : g;
+        b = b.length() == 1 ? "0" + b : b;
+
+
+        return Color.parseColor("#" + r + g + b);
+    }
+
 }
