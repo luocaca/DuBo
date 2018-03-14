@@ -64,14 +64,26 @@
 
     <ImageButton
         android:id="@+id/ivButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/batman" />
 
+    <EditText
+        android:id="@+id/et_bottom_path"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="输入下载地址-----点击蝙蝠 进行下载"
+        android:text="https://github.com/orhanobut/logger/raw/master/art/logger_output.png" />
 
     <com.example.selfview.views.SurfaceViewL
         android:layout_width="50dp"
         android:layout_height="50dp" />
+
+    <Button
+        android:id="@+id/btn_test_video_cache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试小视频缓存" />
 
 
     <com.example.selfview.views.MyView

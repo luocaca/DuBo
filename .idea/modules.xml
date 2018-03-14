@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/91pom/91pom.iml" filepath="$PROJECT_DIR$/91pom/91pom.iml" />
       <module fileurl="file://$PROJECT_DIR$/DuBo.iml" filepath="$PROJECT_DIR$/DuBo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exolibrary/exolibrary.iml" filepath="$PROJECT_DIR$/exolibrary/exolibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ocr_ui/ocr_ui.iml" filepath="$PROJECT_DIR$/ocr_ui/ocr_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/orc/orc.iml" filepath="$PROJECT_DIR$/orc/orc.iml" />
       <module fileurl="file://$PROJECT_DIR$/selfview/selfview.iml" filepath="$PROJECT_DIR$/selfview/selfview.iml" />
       <module fileurl="file://$PROJECT_DIR$/xxlib/xxlib.iml" filepath="$PROJECT_DIR$/xxlib/xxlib.iml" />
     </modules>

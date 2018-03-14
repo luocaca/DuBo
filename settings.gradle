@@ -1,1 +1,1 @@
-include ':app',  ':xxlib', ':selfview'
+include ':app', ':xxlib', ':selfview', ':ocr_ui', ':orc', ':91pom', ':exolibrary'

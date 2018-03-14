@@ -8,7 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/91pom" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/exolibrary" />
+            <option value="$PROJECT_DIR$/ocr_ui" />
+            <option value="$PROJECT_DIR$/orc" />
             <option value="$PROJECT_DIR$/selfview" />
             <option value="$PROJECT_DIR$/xxlib" />
           </set>

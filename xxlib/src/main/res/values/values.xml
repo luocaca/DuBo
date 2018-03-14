@@ -13,9 +13,10 @@
         <attr name="max" format="integer" />
         <attr name="progress_text_size" format="dimension" />
         <attr name="progress_text_color" format="color" />
-        <!--<attr name="progress_text_visibility" format="enum">-->
-            <!--<enum name="visible" value="0" />-->
-            <!--<enum name="invisible" value="1" />-->
+        <!--<attr name="progress_text_visibility" formenenum">-->
+            <!--<attr name="visible" value="0" />&ndash;&gt;-->
+            <!--<attr name="invisible" value="1" />&ndash;&gt;-->
+        <!--enenum-->
         <!--</attr>-->
     </declare-styleable>
     <declare-styleable name="MySwipeRefreshLayout">
