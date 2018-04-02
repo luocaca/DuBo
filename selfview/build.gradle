@@ -39,5 +39,11 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.1.1'
     implementation 'com.github.af913337456:WeChatVideoView:1.0'
+    implementation 'com.luocaca:maventest:1.1'
+
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+   
+
 
 }

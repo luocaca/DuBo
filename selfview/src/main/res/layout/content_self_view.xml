@@ -9,6 +9,15 @@
 
     >
 
+
+    <com.example.selfview.views.StepView
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:xx_main_color="@color/main_color"
+        app:xx_step="2"
+        app:xx_textSize="10sp" />
+
     <SeekBar
         android:id="@+id/seekBar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"

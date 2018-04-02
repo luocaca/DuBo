@@ -1,10 +1,12 @@
 package com.example.selfview;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +22,11 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.example.maventest.EsayVideoEditActivity;
 import com.example.selfview.http.thread.DownLoadRunnable;
 import com.example.selfview.http.thread.ThreadPoolUtil;
 import com.example.selfview.views.MView;
+import com.example.selfview.views.StepView;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     private MView my_view;
 
+    private StepView mStepView;
+
     SeekBar seekBar2;
 
     private ImageButton ivButton;
@@ -59,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
     private byte[] html;
 
     private Button btn_test_video_cache;
+    private int translatex;
+    private int translatey;
+    private Drawable src;
+    private FloatingActionButton fab;
+    private float dx;
+    private float dy;
+    private float downY;
+    private float downX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +86,36 @@ public class MainActivity extends AppCompatActivity {
 
 
         SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        mStepView = findViewById(R.id.step_view);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                Log.i(TAG, "onProgressChanged: ----" + progress);
+                if (progress > 9) {
+                    mStepView.setStep(3);
+                } else if (progress > 4) {
+                    mStepView.setStep(2);
+                } else if (progress > 0) {
+                    mStepView.setStep(1);
+                } else if (progress == 0) {
+                    mStepView.setStep(0);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         Button btn_test_video_cache = (Button) findViewById(R.id.btn_test_video_cache);
@@ -89,11 +134,105 @@ public class MainActivity extends AppCompatActivity {
         et_bottom_path = (EditText) findViewById(R.id.et_bottom_path);
 
 
+        translatex = 0;
+        translatey = 0;
+
+        ivButton1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+//                Log.i(TAG, "before: \n .getRawX()=" + event.getRawX() + "  .getRawY()" + event.getRawY() + " .getX()= " + ivButton1.getX() + " .getY() " + ivButton1.getY());
+
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.i(TAG, "ACTION_DOWN: " + event.getX() + "  " + event.getY() + "  " + ivButton1.getX() + "  " + ivButton1.getY() + "  " + event.getRawX() + "  " + event.getRawY());
+                    dx = event.getX();
+                    dy = event.getY();
+
+                    downX = ivButton1.getX();
+                    downY = ivButton1.getY();
+
+
+//                    ivButton1.setX(event.getRawX() - 315 / 2);
+//                    ivButton1.setY(event.getRawY() - 315 / 2);
+//                    src = ivButton1.getDrawable();
+//                    ivButton1.setImageDrawable(tintDrawable(src, ColorStateList.valueOf(getRandomColor())));
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    ivButton1.setX(event.getRawX() - dx);
+                    ivButton1.setY(event.getRawY() - dy);
+                    Log.i(TAG, "ACTION_MOVE: event getx y " + event.getX() + "  " + event.getY());
+
+
+                    Log.i(TAG, "ivButton1: getX y  " + ivButton1.getX() + "  " + ivButton1.getY());
+                    Log.i(TAG, "ivButton1: getLeft r " + ivButton1.getLeft() + "  " + ivButton1.getTop());
+                    /*  get  */
+
+                    src = ivButton1.getDrawable();
+                    ivButton1.setImageDrawable(tintDrawable(src, ColorStateList.valueOf(getRandomColor())));
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    ivButton1.setX(event.getRawX() - ivButton1.getX());
+//                    ivButton1.setY(event.getRawY() - ivButton1.getY());
+
+
+                    Log.i(TAG, "+ event.getX()= " + event.getX());
+                    Log.i(TAG, (ivButton1.getX() - downX) + " ");
+                    Log.i(TAG, ivButton1.getX() + "");
+                    Log.i(TAG, (downX) + " ");
+
+                    if (Math.abs(ivButton1.getX() - downX) > 5) {
+                        //滑动操作
+                        Log.i(TAG, "onTouch: 滑动");
+
+                    } else if (Math.abs(ivButton1.getY() - downY) > 5) {
+                        Log.i(TAG, "onTouch: 滑动");
+                    } else {
+                        // 点击操作
+                        AnimationActivity.start(MainActivity.this);
+                        Log.i(TAG, "onTouch: 点击");
+
+
+                    }
+
+
+                }
+
+
+//                Log.i(TAG, "after: \n .getRawX()=" + event.getRawX() + "  .getRawY()" + event.getRawY() + " .getX()= " + ivButton1.getX() + " .getY() " + ivButton1.getY());
+//                Log.i(TAG, "ivButton1 location" + ivButton1.getLeft() + " " + ivButton1.getTop() + "  " + ivButton1.getRight() + "  " + ivButton1.getBottom());
+
+                return true;
+
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG, "ivButton1 location" + ivButton1.getLeft() + " " + ivButton1.getTop() + "  " + ivButton1.getRight() + "  " + ivButton1.getBottom() + "  width = " + ivButton1.getWidth() + "  height = " + ivButton1.getHeight());
+            }
+        }, 1000);
+        Log.i(TAG, "ivButton1 location" + ivButton1.getLeft() + " " + ivButton1.getTop() + "  " + ivButton1.getRight() + "  " + ivButton1.getBottom() + "  width = " + ivButton1.getWidth() + "  height = " + ivButton1.getHeight());
+
+
         ivButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Drawable src = ivButton1.getDrawable();
                 ivButton1.setImageDrawable(tintDrawable(src, ColorStateList.valueOf(getRandomColor())));
+
+//                ivButton1.setTranslationX(translatex += 10);
+//                ivButton1.setTranslationY(translatex += 10);
+                ivButton1.setX(translatex += 10);
+                ivButton1.setY(translatey += 10);
+
+
+                AnimationActivity.start(MainActivity.this);
+
+
+                if (true) {
+                    return;
+                }
 
                 Toast.makeText(MainActivity.this, "开始下载文件-----   ", Toast.LENGTH_SHORT).show();
 
@@ -358,7 +497,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -368,7 +507,23 @@ public class MainActivity extends AppCompatActivity {
 //                my_view.setVisibility(my_view.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
 //
 //
-                VideoActivity.start(MainActivity.this);
+//                VideoActivity.start(MainActivity.this);
+
+                String video = Environment.getExternalStorageDirectory().getPath() + File.separator
+                        + "myvideos" + File.separator + "a1.mp4";
+
+                if (new File(video).exists()) {
+                    Log.i(TAG, "存在此视频: ");
+                } else {
+                    Log.w(TAG, "不 存在此视频: ");
+                }
+
+                Intent intent1 = new Intent();
+                intent1.putExtra(EsayVideoEditActivity.PATH, video);
+                intent1.setClass(MainActivity.this, EsayVideoEditActivity.class);
+                startActivity(intent1);
+
+
             }
         });
 
@@ -452,5 +607,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return imageSrcList;
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

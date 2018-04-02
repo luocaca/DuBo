@@ -36,6 +36,7 @@
 
         <activity android:name=".VideoActivity" />
         <activity android:name=".VideoCacheActivity" />
+        <activity android:name=".AnimationActivity" />
     </application>
 
 

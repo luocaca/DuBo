@@ -11,6 +11,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -30,6 +31,16 @@
     <declare-styleable name="MView">
         <!-- 声明我们的属性， 名称为 default_size , 取值类型为 尺寸类型 (dp,px 等) -->
         <attr name="text" format="string|reference" />
+    </declare-styleable>
+
+
+
+    <declare-styleable name="StepView">
+        <!-- 声明我们的属性， 名称为 default_size , 取值类型为 尺寸类型 (dp,px 等) -->
+        <attr name="xx_step" format="integer"/>
+        <attr name="xx_main_color" format="color" />
+        <attr name="xx_radius" format="dimension" />
+        <attr name="xx_textSize" format="dimension|reference"  />
     </declare-styleable>
 
 

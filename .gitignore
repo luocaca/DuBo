@@ -9,8 +9,8 @@
 /captures
 .externalNativeBuild
 /.idea/
-app/libs/
+#app/libs/
 app/release/
-libs/
+#libs/
 release/
 src/main/java/shishicai/com/dubo/weidet/dialog/
