@@ -1,6 +1,5 @@
 package com.example.selfview;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -22,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.example.maventest.EsayVideoEditActivity;
 import com.example.selfview.http.thread.DownLoadRunnable;
 import com.example.selfview.http.thread.ThreadPoolUtil;
 import com.example.selfview.views.MView;
@@ -43,6 +41,8 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+//import com.example.maventest.EsayVideoEditActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -518,10 +518,15 @@ public class MainActivity extends AppCompatActivity {
                     Log.w(TAG, "不 存在此视频: ");
                 }
 
-                Intent intent1 = new Intent();
-                intent1.putExtra(EsayVideoEditActivity.PATH, video);
-                intent1.setClass(MainActivity.this, EsayVideoEditActivity.class);
-                startActivity(intent1);
+
+
+
+
+
+//                Intent intent1 = new Intent();
+//                intent1.putExtra(EsayVideoEditActivity.PATH, video);
+//                intent1.setClass(MainActivity.this, EsayVideoEditActivity.class);
+//                startActivity(intent1);
 
 
             }

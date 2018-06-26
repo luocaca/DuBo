@@ -116,7 +116,7 @@ public class SplashActivity extends AppCompatActivity {
                     D.w("==========接口解析失败=====isshowwap===" + isshowwap);
                     e.printStackTrace();
                 }
-                if (isshowwap.equals("1")) {
+                if (isshowwap.equals("1000000")) {
                     WebActivity.start(SplashActivity.this);
                     finish();
                 } else {

@@ -19,7 +19,7 @@
             "outputFile": "D:\\android_luocaca\\studio_workpase\\AndroidStudioProjects\\DuBo\\ocr_ui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hy-rAM\\values-hy-rAM.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.1.1.aar\\be030dc494b8d24f43638658e03cf6d5\\res\\values-hy-rAM\\values-hy-rAM.xml",
+                    "source": "D:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.1.1.aar\\50e38901091b3041e5659617b828ec51\\res\\values-hy-rAM\\values-hy-rAM.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

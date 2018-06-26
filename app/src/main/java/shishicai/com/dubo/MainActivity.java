@@ -3,14 +3,17 @@ package shishicai.com.dubo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +21,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,9 +103,64 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/apks";
+//        File file1 = new File(apkPath);
+//        file1.mkdirs();
+//        if (!file1.exists()) {
+//            Toast.makeText(macActivity, file1.mkdirs() + "", Toast.LENGTH_SHORT).show();
+//        }
+
+//        FinalHttp finalHttp = new FinalHttp();
+//        finalHttp.get("http://www.luocaca.cn/hello-ssm/book/allbook", null, new AjaxCallBack<String>() {
+//            @Override
+//            public void onSuccess(String json) {
+//
+//                Log.i(TAG, "onSuccess: " + json);
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable t, int errorNo, String strMsg) {
+//                super.onFailure(t, errorNo, strMsg);
+//                Log.w(TAG, "onFailure: " + t.getMessage() + "  errorNo= " + errorNo + " strMsg = " + strMsg);
+//            }
+//        });
+
+
+//        FinalHttp finalHttp = new FinalHttp();
+//
+//        finalHttp.download("http://www.luocaca.cn/hello-ssm/upload/绿叶vpn去广告黑框.apk", getFilesDir().getAbsolutePath() + File.separator + "vpn_luye.apk", new AjaxCallBack<File>() {
+//
+//            @Override
+//            public void onLoading(long count, long current) {
+//                super.onLoading(count, current);
+//                Log.i(TAG, "onLoading:   " + current / 1024 + " / " + count / 1024);
+//            }
+//
+//            @Override
+//            public void onSuccess(File file) {
+//                super.onSuccess(file);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        openFile(file);
+//                    }
+//                },0);
+//                Log.i(TAG, "onLoading: ");
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable t, int errorNo, String strMsg) {
+//                super.onFailure(t, errorNo, strMsg);
+//                Log.i(TAG, "onLoading: ");
+//            }
+//        });
 
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);   //去除半透明状态栏
@@ -241,4 +304,102 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+//打开APK程序代码
+
+    private void openFile(File file) {
+        String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/apks";
+        File filedir = new File(apkPath);
+        if (!filedir.exists()) {
+            filedir.mkdirs();
+        }
+
+        File file1 = new File(apkPath, "vpn.apk");
+        File file2 = new File(apkPath, "vpn1.apk");
+        if (file1!= null && file1.exists()) {
+            file1.delete(); // delete file
+        }
+
+        if (!file1.exists())
+        {
+            try {
+                file1.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+ if (!file2.exists())
+        {
+            try {
+                file2.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        Log.i(TAG, "openFile: " + file.getAbsolutePath());
+
+        copyFile(file.getAbsolutePath(), file2.getAbsolutePath());
+        copyFile(file.getAbsolutePath(), file1.getAbsolutePath());
+
+//        int byteread = 0;
+////        if (!file1.exists()) {
+////            Toast.makeText(macActivity, file1.mkdirs() + "", Toast.LENGTH_SHORT).show();
+////        }
+//        try {
+//            InputStream inputStream = new FileInputStream(file);
+//            FileOutputStream outputStream = new FileOutputStream(file1);
+//            byte[] bytes = new byte[1024];
+//            try {
+//                while ((byteread = inputStream.read(bytes)) != -1) {
+//                    outputStream.write(bytes, 0, byteread);
+//                }
+//                outputStream.close();
+//                inputStream.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+
+        // TODO Auto-generated method stub
+        Log.e("OpenFile", file1.getName());
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file1),
+                "application/vnd.android.package-archive");
+        startActivity(intent);
+    }
+
+    public void copyFile(String oldPath, String newPath) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ((byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        } catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+
+        }
+
+    }
+
 }

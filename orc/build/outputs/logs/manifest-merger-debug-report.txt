@@ -1,0 +1,163 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:3:1-33:12
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.1.aar\0f30c6d387e2f202a951d3b6a8354057\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.1.aar\91163c6a96c311d07453d5a2c8e679fe\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.1.aar\8d7d0981f74995f24915f506d7299a19\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.1.aar\0cd4e86d5085c559dcc9ef4eb36664f1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.1.aar\61798d33a11935430951f3d4f75a9647\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.1.aar\9432698c220953eb6486e551192e46fb\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.1.aar\efea21824e16964d9c8bf7375e7d149f\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.1.aar\08649a6de400f6217e9143a084569a0d\AndroidManifest.xml:17:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+	package
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:4:11-39
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:1-27:12
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:3:11-69
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:6:5-79
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:13:5-80
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:13:5-80
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:6:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:7:5-80
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:14:5-81
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.INTERNET
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:8:22-64
+application
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:9:5-25:19
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:5-31:19
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:5-31:19
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.1.aar\0f30c6d387e2f202a951d3b6a8354057\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.1.aar\0f30c6d387e2f202a951d3b6a8354057\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.1.aar\91163c6a96c311d07453d5a2c8e679fe\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.1.aar\91163c6a96c311d07453d5a2c8e679fe\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.1.aar\8d7d0981f74995f24915f506d7299a19\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.1.aar\8d7d0981f74995f24915f506d7299a19\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.1.aar\0cd4e86d5085c559dcc9ef4eb36664f1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.1.aar\0cd4e86d5085c559dcc9ef4eb36664f1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.1.aar\61798d33a11935430951f3d4f75a9647\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.1.aar\61798d33a11935430951f3d4f75a9647\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.1.aar\9432698c220953eb6486e551192e46fb\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.1.aar\9432698c220953eb6486e551192e46fb\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.1.aar\efea21824e16964d9c8bf7375e7d149f\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.1.aar\efea21824e16964d9c8bf7375e7d149f\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.1.aar\08649a6de400f6217e9143a084569a0d\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.1.aar\08649a6de400f6217e9143a084569a0d\AndroidManifest.xml:25:5-20
+	android:supportsRtl
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:13:13-39
+	android:label
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:12:13-45
+	android:vmSafeMode
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:26:9-34
+	android:icon
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:11:13-47
+	android:allowBackup
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:10:13-39
+	android:theme
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:14:13-44
+activity#com.baidu.ocr.demo.MainActivity
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:15:9-21:20
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:15:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:16:13-20:29
+action#android.intent.action.MAIN
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:17:17-68
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:19:17-76
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:19:27-74
+activity#com.baidu.ocr.demo.IDCardActivity
+ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:22:9-24:20
+	android:label
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:23:13-48
+	android:name
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml:22:19-49
+uses-sdk
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:8:5-10:41
+MERGED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.1.aar\0f30c6d387e2f202a951d3b6a8354057\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.1.aar\0f30c6d387e2f202a951d3b6a8354057\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.1.aar\91163c6a96c311d07453d5a2c8e679fe\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-vector-drawable:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.1.aar\91163c6a96c311d07453d5a2c8e679fe\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.1.aar\8d7d0981f74995f24915f506d7299a19\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.1.aar\8d7d0981f74995f24915f506d7299a19\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.1.aar\0cd4e86d5085c559dcc9ef4eb36664f1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.1.aar\0cd4e86d5085c559dcc9ef4eb36664f1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.1.aar\61798d33a11935430951f3d4f75a9647\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.1.aar\61798d33a11935430951f3d4f75a9647\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.1.aar\9432698c220953eb6486e551192e46fb\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.1.aar\9432698c220953eb6486e551192e46fb\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.1.aar\efea21824e16964d9c8bf7375e7d149f\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.1.aar\efea21824e16964d9c8bf7375e7d149f\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.1.aar\08649a6de400f6217e9143a084569a0d\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.1.aar\08649a6de400f6217e9143a084569a0d\AndroidManifest.xml:21:5-23:58
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.1.1] C:\Users\Administrator\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.1.aar\be030dc494b8d24f43638658e03cf6d5\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		ADDED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+		INJECTED from D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\orc\src\main\AndroidManifest.xml
+uses-permission#android.permission.CAMERA
+ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:12:5-65
+	android:name
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:12:22-62
+uses-feature#android.hardware.camera2.full
+ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:16:5-66
+	android:name
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:16:19-63
+uses-feature#android.hardware.camera
+ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:17:5-60
+	android:name
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:17:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:18:5-70
+	android:name
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:18:19-67
+activity#com.baidu.ocr.ui.camera.CameraActivity
+ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:27:9-30:80
+	android:configChanges
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:29:13-59
+	android:theme
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:30:13-77
+	android:name
+		ADDED from [:ocr_ui] D:\android_luocaca\studio_workpase\AndroidStudioProjects\DuBo\ocr_ui\build\intermediates\manifests\full\debug\AndroidManifest.xml:28:13-66
